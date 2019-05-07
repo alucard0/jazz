@@ -17,8 +17,8 @@ function getsUsersList() {
 }
 function fillTableUsers(users) {
   let tr = "";
-  let DeleteControl = "";
-  var banderaAdmin = false;
+  let deleteColumn = "";
+  let banderaAdmin = false;
 
   if (users.length > 0) {
     users.forEach(user => {
@@ -32,12 +32,12 @@ function fillTableUsers(users) {
         "<td>" +
         user.password +
         "</td>";
-      if (user.type === "ADMIN" && banderaAdmin == false) 
+      if (user.type === "ADMIN" && !banderaAdmin) 
       {
-        DeleteControl = "<td>" + "</td>";
+        deleteColumn = "<td></td>";
         banderaAdmin = true;
       } else {
-        DeleteControl =
+        deleteColumn =
           '<td class="actions-buttons">' +
           '<button user-id="' +
           user.id_user +
@@ -46,7 +46,7 @@ function fillTableUsers(users) {
           " </td>";
       }
 
-      tr += "<tr>" + information + DeleteControl + "</tr>";
+      tr += "<tr>" + information + deleteColumn + "</tr>";
     });
   } else {
     tr = '<tr><td colspan="4" class="text-center">No hay resultados</td></tr>';
